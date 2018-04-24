@@ -8,11 +8,11 @@
 				"description": "The base URL where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated.",
 				"artifactsBaseUrl": ""
 			},
-			"defaultValue": "https://raw.githubusercontent.com/Microsoft/openshift-origin/master"
+			"defaultValue": "https://raw.githubusercontent.com/tgj/openshift-origin/master"
 		},
 		"masterVmSize": {
 			"type": "string",
-			"defaultValue": "Standard_DS3_v2",
+			"defaultValue": "Standard_D4s_v3",
 			"allowedValues": [
 				"Standard_A4", "Standard_A5", "Standard_A6", "Standard_A7", "Standard_A8", "Standard_A9", "Standard_A10", "Standard_A11",
 				"Standard_D1", "Standard_D2", "Standard_D3", "Standard_D4",
@@ -36,7 +36,7 @@
 		},
 		"nodeVmSize": {
 			"type": "string",
-			"defaultValue": "Standard_DS3_v2",
+			"defaultValue": "Standard_D2s_v3",
 			"allowedValues": [
 				"Standard_A4", "Standard_A5", "Standard_A6", "Standard_A7", "Standard_A8", "Standard_A9", "Standard_A10", "Standard_A11",
 				"Standard_D1", "Standard_D2", "Standard_D3", "Standard_D4",
@@ -60,7 +60,7 @@
 		},
 		"infraVmSize": {
 			"type": "string",
-			"defaultValue": "Standard_DS3_v2",
+			"defaultValue": "Standard_D2s_v3",
 			"allowedValues": [
 				"Standard_A4", "Standard_A5", "Standard_A6", "Standard_A7", "Standard_A8", "Standard_A9", "Standard_A10", "Standard_A11",
 				"Standard_D1", "Standard_D2", "Standard_D3", "Standard_D4",
@@ -92,7 +92,7 @@
 		},
 		"openshiftClusterPrefix": {
 			"type": "string",
-			"defaultValue": "mycluster",
+			"defaultValue": "openshift",
 			"minLength": 2,
 			"maxLength": 20,
 			"metadata": {
@@ -135,7 +135,7 @@
 		},
 		"adminUsername": {
 			"type": "string",
-			"defaultValue": "ocpadmin",
+			"defaultValue": "clusteradmin",
 			"minLength": 1,
 			"metadata": {
 				"description": "Administrator username on all VMs and first user created for OpenShift login"
