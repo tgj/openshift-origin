@@ -235,7 +235,7 @@ cat > /home/${SUDOUSER}/setup-azure-master.yml <<EOF
           "resourceGroup": "{{ lookup('env','RESOURCEGROUP') }}",
           "location": "{{ lookup('env','LOCATION') }}",
           "cloud": "{{ lookup('env','CLOUDNAME') }}"
-        } 
+        }
     notify:
     - restart origin-master-api
     - restart origin-master-controllers
@@ -302,7 +302,7 @@ cat > /home/${SUDOUSER}/setup-azure-node-master.yml <<EOF
           "resourceGroup": "{{ lookup('env','RESOURCEGROUP') }}",
           "location": "{{ lookup('env','LOCATION') }}",
           "cloud": "{{ lookup('env','CLOUDNAME') }}"
-        } 
+        }
     notify:
     - restart origin-node
   - name: insert the azure disk config into the node
@@ -358,7 +358,7 @@ cat > /home/${SUDOUSER}/setup-azure-node.yml <<EOF
           "resourceGroup": "{{ lookup('env','RESOURCEGROUP') }}",
           "location": "{{ lookup('env','LOCATION') }}",
           "cloud": "{{ lookup('env','CLOUDNAME') }}"
-        } 
+        }
     notify:
     - restart origin-node
   - name: insert the azure disk config into the node
@@ -508,7 +508,7 @@ EOF
 
 echo $(date) " - Cloning openshift-ansible repo for use in installation"
 
-runuser -l $SUDOUSER -c "git clone -b release-3.7 https://github.com/openshift/openshift-ansible /home/$SUDOUSER/openshift-ansible"
+runuser -l $SUDOUSER -c "git clone -b release-3.9 https://github.com/openshift/openshift-ansible /home/$SUDOUSER/openshift-ansible"
 
 echo $(date) " - Running network_manager.yml playbook"
 DOMAIN=`domainname -d`
@@ -577,9 +577,9 @@ then
 	   echo $(date) "- Cloud Provider setup of master config on Master Nodes failed to completed"
 	   exit 7
 	fi
-	
+
 	echo $(date) "- Sleep for 60"
-	
+
 	sleep 60
 	runuser $SUDOUSER -c "ansible-playbook ~/setup-azure-node-master.yml"
 
@@ -590,9 +590,9 @@ then
 	   echo $(date) "- Cloud Provider setup of node config on Master Nodes failed to completed"
 	   exit 8
 	fi
-	
+
 	echo $(date) "- Sleep for 60"
-	
+
 	sleep 60
 	runuser $SUDOUSER -c "ansible-playbook ~/setup-azure-node.yml"
 
@@ -603,9 +603,9 @@ then
 	   echo $(date) "- Cloud Provider setup of node config on App Nodes failed to completed"
 	   exit 9
 	fi
-	
+
 	echo $(date) "- Sleep for 120"
-	
+
 	sleep 120
 	runuser $SUDOUSER -c "ansible-playbook ~/masternonschedulable.yml"
 
@@ -618,11 +618,11 @@ then
 	fi
 
 	echo $(date) "- Restarting OVS to complete installation"
-	
+
 	echo $(date) "- Sleep for 20"
-	
+
 	sleep 20
-	runuser -l $SUDOUSER -c  "oc label nodes $MASTER-0 openshift-infra=apiserver --overwrite=true"	
+	runuser -l $SUDOUSER -c  "oc label nodes $MASTER-0 openshift-infra=apiserver --overwrite=true"
 	runuser -l $SUDOUSER -c  "oc label nodes --all logging-infra-fluentd=true logging=true"
 
 	runuser -l $SUDOUSER -c  "ansible all -b  -m service -a 'name=openvswitch state=restarted' "
@@ -641,9 +641,9 @@ fi
 
 if [ $METRICS == "true" ]
 then
-	sleep 30	
+	sleep 30
 	echo $(date) "- Determining Origin version from rpm"
-	OO_VERSION=$(rpm -q origin | cut -d'-' -f 2)	
+	OO_VERSION=$(rpm -q origin | cut -d'-' -f 2)
 	echo $(date) "- Deploying Metrics"
 	if [ $AZURE == "true" ]
 	then
@@ -662,7 +662,7 @@ fi
 
 # Configure Logging
 
-if [ $LOGGING == "true" ] 
+if [ $LOGGING == "true" ]
 then
 	sleep 60
 	echo $(date) "- Deploying Logging"
